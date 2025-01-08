@@ -17,16 +17,5 @@ A web-based bookstore built with Django to browse, search, and purchase books.
 ## 🛠️ Setup
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/bookstore.git
+   git clone https://github.com/Shaon007/Django-BookStore
 )
-
-## 🚀 Features
-- Browse and search for books.
-- User authentication (login & registration).
-- Add books to cart and checkout.
-- Admin panel for managing inventory.
-
-## 🛠️ Setup
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/yourusername/bookstore.git
