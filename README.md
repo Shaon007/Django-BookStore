@@ -18,4 +18,4 @@ A web-based bookstore built with Django to browse, search, and purchase books.
 1. Clone the repo:
    ```bash
    git clone https://github.com/Shaon007/Django-BookStore
-)
+
