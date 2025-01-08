@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta id="meta" name="viewport"
+        content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style type="text/css">
+        body {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {% if object.book_available is True %}
+        <div class="row">
+            <div class="col-lg">
+                <br>
+                <div class="text-center" style="width: 22rem;">
+                    <img src="{{ object.image_url }}" class="card-img">
+                </div>
+            </div>
+            <div class="col-lg">
+                <br>
+                <div class="card card-body">
+                    <h3>{{ object.title }}</h3>
+                    <hr>
+                    <h4>Total: ${{ object.price|floatformat:2 }}</h4>
+                    <hr>
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#buyModal">
+                        Buy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Modal -->
+    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buyModalLabel">Complete Your Purchase</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Thank you for your interest in purchasing this book!</p>
+                    <p>Title: <strong>{{ object.title }}</strong></p>
+                    <p>Price: <strong>${{ object.price|floatformat:2 }}</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Confirm Purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    </div>
+    <div class="mx-auto" style="width: 340px;">
+        <h4 class="text-danger">Sorry, this book is out of Stock!</h4>
+    {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT9cxY9Gfhldg24lKn9S4JwBam3HjL8XNPIYj9fDaL5P0zPaXg"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"
+        integrity="sha384-qa6eOHcoqStC6zcpNd76OBHoUtAl6HshlEFJ4n8wqKuM3a8DJ98kGIM5Q2Ce7zz4"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+FjyULuk+oiiIZmWBrw7LWRjMcDgFQaPF085SMuVxgOERJ+8A7TgpGjn2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+{% endblock content %}

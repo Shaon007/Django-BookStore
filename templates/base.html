@@ -1,0 +1,228 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: white !important;
+    }
+
+    .dropdown-menu {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .search input {
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      border: 2px solid #6a11cb;
+      width: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .search input:focus {
+      box-shadow: 0 0 5px #6a11cb;
+      outline: none;
+    }
+
+    footer {
+      background: #343a40;
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    footer a {
+      color: #6a11cb;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero Banner */
+    .hero-banner-container {
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background: url('https://i.pinimg.com/736x/97/bd/c4/97bdc4bdda3c33e762a96637db28b61c.jpg') no-repeat center center;
+      background-size: cover;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .hero-text p {
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+   /* Card Customization */
+/* Card Customization */
+.card {
+  border: 2px solid #ddd; /* Add border */
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card img {
+  border-radius: 15px;
+  object-fit: cover;
+  height: 200px; /* Adjust image height to maintain equal card height */
+}
+
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1; /* Ensures the card body takes the remaining space */
+}
+
+.card-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Card Grid with Flexbox */
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
+  gap: 1.5rem; /* Adds gap between cards */
+  justify-content: center;
+}
+
+/* Card Shadow and Styling */
+.card-deck .card {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+  </style>
+  <title>Online Bookstore</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark">
+    <a class="navbar-brand" href="{% url 'list' %}">
+      BookStore
+    </a>
+    <div class="btn-group dropright">
+      <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ user }}
+      </a>
+      <div class="dropdown-menu">
+        {% if user.is_authenticated %}
+        <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        {% else %}
+        <a class="dropdown-item" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a>
+        <a class="dropdown-item" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+    <form class="search ml-auto" action="{% url 'search_results' %}" method="get">
+      <input name="q" type="text" placeholder="Find your next favorite book…" autocomplete="off">
+      <button type="submit" class="btn btn-primary btn-sm rounded-circle ml-2"><i class="fas fa-search"></i></button>
+    </form>
+  </nav>
+
+  <!-- Hero Banner Container -->
+  <div class="hero-banner-container mt-4">
+    <div class="hero-banner">
+      <div class="hero-text">
+        <h1>Discover Your Next Favorite Book</h1>
+        <p>Browse through our collection of bestsellers and new releases</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="container mt-4">
+    {% block content %}
+    <div class="card-deck">
+      <!-- Example Cards -->
+      <div class="card">
+        <img src="{% static 'images/book1.jpg' %}" class="card-img-top" alt="Book 1">
+        <div class="card-body">
+          <h5 class="card-title">Book Title 1</h5>
+          <p class="card-text">Description of the book goes here. This is a short summary or review.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/book2.jpg' %}" class="card-img-top" alt="Book 2">
+        <div class="card-body">
+          <h5 class="card-title">Book Title 2</h5>
+          <p class="card-text">Description of the book goes here. This is a short summary or review.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/book3.jpg' %}" class="card-img-top" alt="Book 3">
+        <div class="card-body">
+          <h5 class="card-title">Book Title 3</h5>
+          <p class="card-text">Description of the book goes here. This is a short summary or review.</p>
+        </div>
+      </div>
+    </div>
+    {% endblock content %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Online Bookstore. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    <p>Follow us on <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a> and <a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
